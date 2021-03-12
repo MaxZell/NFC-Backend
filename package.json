@@ -1,0 +1,13 @@
+{
+  "name": "NFC-Backend",
+  "version": "1.0.0",
+  "description": "M242",
+  "main": "index.js",
+  "repository": "https://github.com/MaxZell/NFC-Backend.git",
+  "author": "mzelensky <maxim.zelensky@soxes.ch>",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.17.1",
+    "mongodb": "^3.6.4"
+  }
+}
