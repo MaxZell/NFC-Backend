@@ -16,8 +16,31 @@ app.get('/', function(res) {
 });
 
 app.get('/ajax/get-data', function(req, res) {
+    data = "some data";
+    res.send(`data from server: ${data}`);
     console.log("get-data");
 });
+
+// app.get('/coronaApi', function(req, res) {
+//     //get all corona api json
+//     fetch("https://covid-19-data.p.rapidapi.com/country?name=switzerland", {
+//         "method": "GET",
+//         "headers": {
+//             "x-rapidapi-key": "",
+//             "x-rapidapi-host": ""
+//         }
+//     })
+//     .then(response => {
+//         return response.json();
+//     })
+//     .then((data) => {
+//         let result = data[0].deaths;
+//         res.send(`CH Covid-19 deaths: ${result}`);
+//     })
+//     .catch(err => {
+//         console.error(err);
+//     });
+// });
 
 //connect to mongodb
 // const uri = "mongodb://localhost:27017/?readPreference=primary&appname=MongoDB%20Compass&ssl=false";
