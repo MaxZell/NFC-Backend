@@ -1,5 +1,5 @@
 ﻿const express = require('express');
-// const MongoClient = require('mongodb').MongoClient;
+const MongoClient = require('mongodb').MongoClient;
 // const bodyParser = require('body-parser');
 const path = require('path');
 
@@ -16,6 +16,28 @@ app.get('/', function(res) {
 });
 
 app.get('/ajax/get-data', function(req, res) {
+    data = "some data";
+    res.send(`data from server: ${data}`);
+    console.log("get-data");
+});
+
+app.get('/ajax/save-data', function(req, res) {
+    const url = "mongodb://localhost:27017/?readPreference=primary&appname=MongoDB%20Compass&ssl=false";
+    MongoClient.connect(url, function(err, db) {
+        if (err) throw err;
+        var dbo = db.db("m242");
+        let hash = req;
+        var myobj = { UID: hash};
+        dbo.collection("cards").insertOne(myobj, function(err, res) {
+            if (err) throw err;
+                console.log("UID saved");
+                res.send(`UID saved`);
+          db.close();
+        });
+    });
+});
+
+app.get('/ajax/login', function(req, res) {
     data = "some data";
     res.send(`data from server: ${data}`);
     console.log("get-data");
@@ -43,24 +65,24 @@ app.get('/ajax/get-data', function(req, res) {
 // });
 
 //connect to mongodb
-// const uri = "mongodb://localhost:27017/?readPreference=primary&appname=MongoDB%20Compass&ssl=false";
-// // Create a new MongoClient
-// const client = new MongoClient(uri);
-// async function run() {
-//   try {
-//     // Connect the client to the server
-//     await client.connect();
-//     // Establish and verify connection
-//     await client.db("m242").command({ ping: 1 });
-//     console.log("Connected successfully to server");
-//   }
-//   catch{
-//     console.dir
-//   }
-// //   finally {
-// //     // Ensures that the client will close when you finish/error
-// //     await client.close();
-// //   }
-// }
+const uri = "mongodb://localhost:27017/?readPreference=primary&appname=MongoDB%20Compass&ssl=false";
+// Create a new MongoClient
+const client = new MongoClient(uri);
+async function saveToMDB() {
+  try {
+    // Connect the client to the server
+    await client.connect();
+    // Establish and verify connection
+    await client.db("m242").command({ ping: 1 });
+    console.log("Connected successfully to server");
+  }
+  catch{
+    console.dir
+  }
+  finally {
+    // Ensures that the client will close when you finish/error
+    await client.close();
+  }
+}
 // run();
 // // run().catch(console.dir);
