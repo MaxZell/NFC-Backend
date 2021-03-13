@@ -31,15 +31,15 @@ app.get('/ajax/save-data', function(req, res) {
         dbo.collection("cards").insertOne(myobj, function(err, res) {
             if (err) throw err;
                 console.log("UID saved");
-                res.send(`UID saved`);
           db.close();
         });
+        res.send(`UID saved`);
     });
 });
 
 app.get('/ajax/login', function(req, res) {
     data = "some data";
-    res.send(`data from server: ${data}`);
+    res.send(`data from server: ${req}`);
     console.log("get-data");
 });
 
