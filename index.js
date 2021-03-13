@@ -25,7 +25,7 @@ app.get('/ajax/get-data', function(req, res) {
 });
 
 app.post('/ajax/save-data', function(req, res) {
-    const url = "mongodb://localhost:27017/?readPreference=primary&appname=MongoDB%20Compass&ssl=false";
+    const url = "mongodb+srv://m242:process.env.Mongo_m242@cluster0.9rupy.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
     MongoClient.connect(url, function(err, db) {
         if (err) throw err;
         var dbo = db.db("m242");
@@ -41,9 +41,7 @@ app.post('/ajax/save-data', function(req, res) {
 });
 
 app.post('/ajax/login', function(req, res) {
-    // data = "some data";
     res.send(`data from server: ${req.body.uid}`);
-    // console.log(req);
 });
 
 // app.get('/coronaApi', function(req, res) {
