@@ -38,9 +38,9 @@ app.post('/ajax/save-data', function(req, res) {
 });
 
 app.post('/ajax/login', function(req, res) {
-    data = "some data";
+    // data = "some data";
     res.send(`data from server: ${req.body.uid}`);
-    console.log("get-data");
+    // console.log(req);
 });
 
 // app.get('/coronaApi', function(req, res) {
