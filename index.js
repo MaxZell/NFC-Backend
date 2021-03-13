@@ -21,7 +21,7 @@ app.get('/ajax/get-data', function(req, res) {
     console.log("get-data");
 });
 
-app.get('/ajax/save-data', function(req, res) {
+app.post('/ajax/save-data', function(req, res) {
     const url = "mongodb://localhost:27017/?readPreference=primary&appname=MongoDB%20Compass&ssl=false";
     MongoClient.connect(url, function(err, db) {
         if (err) throw err;
@@ -37,7 +37,7 @@ app.get('/ajax/save-data', function(req, res) {
     });
 });
 
-app.get('/ajax/login', function(req, res) {
+app.post('/ajax/login', function(req, res) {
     data = "some data";
     res.send(`data from server: ${req}`);
     console.log("get-data");
