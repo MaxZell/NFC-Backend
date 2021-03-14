@@ -26,7 +26,7 @@ app.get('/ajax/get-data', function(req, res) {
 
 app.post('/ajax/save-data', function(req, res) {
     const pw = process.env.MONGODB_URI;
-    const url = `mongodb+srv://m242:${pw}@cluster0.9rupy.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`;
+    const url = `mongodb+srv://m242:${pw}@cluster0.9rupy.mongodb.net/m242?retryWrites=true&w=majority`;
     MongoClient.connect(url, function(err, db) {
         if (err) throw err;
         var dbo = db.db("m242");
