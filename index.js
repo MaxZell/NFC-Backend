@@ -30,7 +30,7 @@ app.post('/ajax/save-data', function(req, res) {
     const uri = `mongodb+srv://m242:${pw}@cluster0.9rupy.mongodb.net/m242?retryWrites=true&w=majority`;
     const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
     client.connect(err => {
-        res.send(`connection`);
+        // res.send(`connection`);
     //   const collection = client.db("m242").collection("cards");
         let hash = req.body.uid;
         var myobj = { uid: hash};
