@@ -53,7 +53,7 @@ app.post('/ajax/save-data', function(req, res) {
     //       db.close();
     //     });
     //     res.send(`UID saved`);
-    // });
+    });
 });
 
 app.post('/ajax/login', function(req, res) {
