@@ -25,18 +25,20 @@ app.get('/ajax/get-data', function(req, res) {
 });
 
 app.post('/ajax/save-data', function(req, res) {
+    res.send(`start`);
     const pw = process.env.Mongo_m242;
-    res.send(pw);
     const uri = `mongodb+srv://m242:${pw}@cluster0.9rupy.mongodb.net/m242?retryWrites=true&w=majority`;
     const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
     client.connect(err => {
+        res.send(`connection`);
     //   const collection = client.db("m242").collection("cards");
         let hash = req.body.uid;
         var myobj = { uid: hash};
         client.db("m242").collection("cards").insertOne(myobj, function(err, res) {
             if (err) throw err;
-                console.log("UID saved");  
+                console.log("UID saved");
       client.close();
+      res.send(`connection2`);
     });
     res.send(`UID saved`);
 
