@@ -26,7 +26,7 @@ app.get('/ajax/get-data', function(req, res) {
 
 app.post('/ajax/save-data', function(req, res) {
     const pw = process.env.MONGODB_URI;
-    const url = `mongodb+srv://m242:${pw}@cluster0.9rupy.mongodb.net/m242?retryWrites=true&w=majority`;
+    const url = `mongodb+srv://m242:${pw}@cluster0-shard-00-00.9rupy.mongodb.net:27017,cluster0-shard-00-01.9rupy.mongodb.net:27017,cluster0-shard-00-02.9rupy.mongodb.net:27017/myFirstDatabase?authSource=admin&replicaSet=atlas-5iir9n-shard-0&w=majority&readPreference=primary&appname=MongoDB%20Compass&retryWrites=true&ssl=true`;
     MongoClient.connect(url, function(err, db) {
         if (err) throw err;
         var dbo = db.db("m242");
