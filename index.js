@@ -29,7 +29,7 @@ app.post('/ajax/save-data', function(req, res) {
         fetch("http://localhost:5000/ajax/save-data", {"method": "POST", "body": {"uid":"test"}}).then(r => console.log(r))
     */
     let hash = req.body.uid;
-    const pw = 'mypass'//process.env.Mongo_m242;
+    const pw = process.env.Mongo_m242;
     const uri = `mongodb+srv://m242:${pw}@cluster0.9rupy.mongodb.net/m242?retryWrites=true&w=majority`;
     const client = new MongoClient(encodeURI(uri), { useNewUrlParser: true, useUnifiedTopology: true });
     client.connect(err => {
