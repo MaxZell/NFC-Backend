@@ -25,7 +25,7 @@ app.get('/ajax/get-data', function(req, res) {
 });
 
 app.post('/ajax/save-data', function(req, res) {
-    const pw = process.env.MONGODB_URI;
+    const pw = process.env.Mongo_m242;
     const uri = `mongodb+srv://m242:${pw}@cluster0.9rupy.mongodb.net/m242?retryWrites=true&w=majority`;
     const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
     client.connect(err => {
