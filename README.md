@@ -8,7 +8,9 @@ autor @MaxZell
 3.1. run locally
 
     in root dir ```nodemon```
+    
     open [http://localhost:5000](http://localhost:5000)
     
 3.2 host on heroku
+    
     use [getting started with heroku](https://devcenter.heroku.com/articles/getting-started-with-nodejs?singlepage=true)
