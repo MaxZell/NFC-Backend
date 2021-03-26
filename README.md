@@ -11,5 +11,4 @@ autor @MaxZell
     open [http://localhost:5000](http://localhost:5000)
     
 3.2 host on heroku
-
-    [getting started with heroku](https://devcenter.heroku.com/articles/getting-started-with-nodejs?singlepage=true)
+    use [getting started with heroku](https://devcenter.heroku.com/articles/getting-started-with-nodejs?singlepage=true)
