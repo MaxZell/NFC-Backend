@@ -2,7 +2,7 @@
 #### Modul M242 LB2
 autor @MaxZell
 
-##Instalation
+## Instalation
 1. ```git clone https://github.com/MaxZell/NFC-Backend.git```  
 2. ```yarn install```  
 
