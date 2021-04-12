@@ -1,5 +1,5 @@
 # NFC-Backend
-#### Modul M242
+#### Modul M242 LB2
 autor @MaxZell
 
 ##Instalation
