@@ -3,6 +3,7 @@
 autor @MaxZell
 
 ## Installation
+0. [install yarn package manager](https://classic.yarnpkg.com/en/docs/install)
 1. ```git clone https://github.com/MaxZell/NFC-Backend.git```  
 2. ```yarn install```  
 
