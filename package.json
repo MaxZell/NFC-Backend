@@ -4,13 +4,15 @@
   "description": "M242",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "node index.js",
+    "dev": "nodemon index.js"
   },
   "repository": "https://github.com/MaxZell/NFC-Backend.git",
   "author": "mzelensky <maxim.zelensky@soxes.ch>",
   "license": "MIT",
   "dependencies": {
     "express": "^4.17.1",
-    "mongodb": "^3.6.4"
+    "mongodb": "^3.6.4",
+    "mqtt": "^4.2.6"
   }
 }
