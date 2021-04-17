@@ -87,7 +87,8 @@ MqttClient.on('message', function (topic, message) {
             // console.log(preparedString)
             let mqttJson = JSON.parse(JSON.parse(JSON.stringify(preparedString.toString())))
             console.log(`uid: ${mqttJson.uid}\ntime: ${mqttJson.time}\ntemperature: ${mqttJson.temperature}`)
-            MqttClient.publish(`${topic_id}/answer`, `uid: ${mqttJson.uid}\ntime: ${mqttJson.time}\ntemperature: ${mqttJson.temperature}`)
+            // MqttClient.publish(`${topic_id}/answer`, `uid: ${mqttJson.uid}\ntime: ${mqttJson.time}\ntemperature: ${mqttJson.temperature}`)
+            MqttClient.publish(`${topic_id}/answer`, `temp: ${message.toString()}`)
           } catch(err) {
             console.error(err)
         }
