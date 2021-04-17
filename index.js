@@ -9,6 +9,10 @@ const MqttClient  = mqtt.connect('mqtt://cloud.tbz.ch')
 const app = express();
 const port = process.env.PORT || 5000;
 
+const pw = process.env.Mongo_m242;
+const uri = `mongodb+srv://m242:${pw}@cluster0.9rupy.mongodb.net/m242?retryWrites=true&w=majority`;
+const client = new MongoClient(encodeURI(uri), { useNewUrlParser: true, useUnifiedTopology: true });
+
 app.use(bodyParser.json());
 
 app.listen(port, () => {
@@ -35,10 +39,7 @@ app.post('/ajax/save-data', function(req, res) {
         fetch("http://localhost:5000/ajax/save-data", {"method": "POST", "body": {"uid":"test"}}).then(r => console.log(r))
     */
     let hash = req.body.uid;
-    const pw = process.env.Mongo_m242;
-    const uri = `mongodb+srv://m242:${pw}@cluster0.9rupy.mongodb.net/m242?retryWrites=true&w=majority`;
-    const client = new MongoClient(encodeURI(uri), { useNewUrlParser: true, useUnifiedTopology: true });
-    
+
     client.connect(err => {
         console.log('-------', err)
         console.log("myhash: " + hash)
@@ -66,7 +67,10 @@ app.post('/ajax/login', function(req, res) {
 */
 const topic_id = "8x3ebv3f4w3EUchR";
 
-MqttClient.on('connect', function () {
+MqttClient.on('connect', () => {
+    MqttClient.subscribe(`${topic_id}/sensor`)
+    MqttClient.subscribe(`${topic_id}/temperature`)
+    MqttClient.subscribe(`${topic_id}/login`)
     MqttClient.subscribe(`${topic_id}/sensor`, function (err) {
       if (!err) {
           console.log("answer sended");
@@ -75,41 +79,34 @@ MqttClient.on('connect', function () {
     })
 })
 
-MqttClient.on('connect', () => {
-    MqttClient.subscribe(`${topic_id}/sensor`)
-    MqttClient.subscribe(`${topic_id}/temperature`)
-    MqttClient.subscribe(`${topic_id}/login`)
-})
-
 MqttClient.on('message', function (topic, message) {
     if(topic === `${topic_id}/sensor`) {
-        console.log(message.toString())
+        // console.log(message.toString())
         try {
             let preparedString = message.toString().replace(/'/gi, '"')
-            console.log(preparedString);
+            // console.log(preparedString)
             let mqttJson = JSON.parse(JSON.parse(JSON.stringify(preparedString.toString())))
-            console.log(`time: ${mqttJson.uid}\ntime: ${mqttJson.time}\ntemperature: ${mqttJson.temperature}`);
+            console.log(`uid: ${mqttJson.uid}\ntime: ${mqttJson.time}\ntemperature: ${mqttJson.temperature}`)
+            MqttClient.publish(`${topic_id}/answer`, `uid: ${mqttJson.uid}\ntime: ${mqttJson.time}\ntemperature: ${mqttJson.temperature}`)
           } catch(err) {
             console.error(err)
         }
     }else if(topic === `${topic_id}/temperature`){
-        // const pw = process.env.Mongo_m242;
-        // const uri = `mongodb+srv://m242:${pw}@cluster0.9rupy.mongodb.net/m242?retryWrites=true&w=majority`;
-        // const client = new MongoClient(encodeURI(uri), { useNewUrlParser: true, useUnifiedTopology: true });
-
-        // client.connect(err => {
-        //     console.log('-------', err)
-        //     client.connect(err => {
-        //         console.log('-------', err)
-        //         var myobj = {"uid": "test2"};
-        //         client.db("m242").collection("cards").insertOne(myobj, function(err, res) {
-        //             if (err) throw err;
-        //                 console.log("UID saved");  
-        //         })
-        //     });
-        // });
+        client.connect(err => {
+            console.log('-------', err)
+            client.connect(err => {
+                console.log('-------', err)
+                var myobj = {"uid": "some temperature placeholder"};
+                client.db("m242").collection("cards").insertOne(myobj, function(err, res) {
+                    if (err) throw err;
+                        console.log("UID saved");
+                        MqttClient.publish(`${topic_id}/answer`, `UID saved`)
+                })
+            });
+        });
     }else if(topic === `${topic_id}/login`){
         console.log(message.toString())
+        MqttClient.publish(`${topic_id}/answer`, 'test successful')
     }
     // MqttClient.end()
 })
